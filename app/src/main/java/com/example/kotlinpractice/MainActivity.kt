@@ -7,12 +7,15 @@ import android.widget.Button
 import com.example.kotlinpractice.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    // TODO : 화면에 출력할 man 데이터를 수정하는 기능 구현할 것 -> LiveData 예제용
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         var man = User("홍길동", "27", 0)
+
+        man.url = "https://ifh.cc/g/NWPI5Q.png" //이미지 호스팅 url
 
         binding.user = man
 

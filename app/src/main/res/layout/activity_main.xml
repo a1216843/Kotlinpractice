@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="com.example.kotlinpractice.User"/>
         <variable
             name="user"
-            type="com.example.kotlinpractice.User" />
+            type="com.example.kotlinpractice.User"/>
     </data>
 
     <LinearLayout
@@ -31,8 +32,10 @@
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:textColor="@color/black"
-            android:text="@{user.genderGetString}" />
-
-
+            android:text="@{(user.gender == 0) ? &quot;남성&quot; : &quot;여성&quot;}" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            imageUrl = "@{user.url}"/>
     </LinearLayout>
 </layout>
