@@ -17,25 +17,32 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="@{user.name}" />
         <TextView
             android:id="@+id/age"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="@{user.age}" />
         <TextView
             android:id="@+id/gender"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="@{(user.gender == 0) ? &quot;남성&quot; : &quot;여성&quot;}" />
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            imageUrl = "@{user.url}"/>
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@{user.phone}" />
+        <Button
+            android:id="@+id/user_config_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수정하기"/>
     </LinearLayout>
 </layout>
