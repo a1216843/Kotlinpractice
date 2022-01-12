@@ -7,23 +7,40 @@ import android.view.View
 import android.widget.Button
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.kotlinpractice.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var getResult : ActivityResultLauncher<Intent>
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    // 액티비티와 생명주기를 달리하는 뷰모델에 라이브데이터를 두어 액티비티가 소멸되어도 데이터를 저장하도록 함
+    lateinit var model : UserViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        model = ViewModelProvider(this).get(UserViewModel::class.java)
+        model.liveData.observe(this, Observer {
+            binding.user = it
+            println("옵저버 실행")
+            println(it.phone)
+        })
 
-        var man = User("홍길동", "27", 0, "010-0000-1111")
+        if(model.liveData.value == null) {
+            model.liveData.apply {
+                value = User("홍길동", "27", 0, "010-0000-1111")
+            }
+        }
 
-        binding.user = man
 
         getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == RESULT_OK) {
-                man.phone = it.data?.getStringExtra("phone").toString()
-                binding.user = man
+                val user = model.liveData.value
+                user?.phone = it.data?.getStringExtra("phone").toString()
+                model.liveData.apply {
+                    value = user
+                }
             }
         }
 
@@ -32,6 +49,12 @@ class MainActivity : AppCompatActivity() {
             getResult.launch(intent)
         }
     }
+
+//    현재 액티비티의 상태를 저장해두고 화면전환 등으로 액티비티가 다시 onCreate될 때 상태를 전달함
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//
+//    }
 
 
 
