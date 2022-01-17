@@ -21,51 +21,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val db = UserDatabase.getInstance(applicationContext)
         model = ViewModelProvider(this).get(UserViewModel::class.java)
-        model.liveData.observe(this, Observer {
-            binding.user = it
+
+        model.userProfileList.observe(this, Observer {
+            var userList = "사용자 목록"
+            for(user in it) {
+                userList += "\n" + "${user.id}" + ", ${user.name}" + ", ${user.age}" + ", ${user.phone}"
+            }
+            binding.profileList.setText(userList)
         })
-        // livedata 초기화
-        if(model.liveData.value == null) {
-            model.liveData.apply {
-                value = User("홍길동", "27", 0, "010-0000-1111")
-            }
-        }
 
-
-        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            if(it.resultCode == RESULT_OK) {
-                val user = model.liveData.value
-                user?.phone = it.data?.getStringExtra("phone").toString()
-                model.liveData.apply {
-                    value = user
-                }
-            }
-        }
-        // 정보 수정 버튼
-        binding.userConfigBtn.setOnClickListener {
-            val intent = Intent(this, EditUserActivity::class.java)
-            getResult.launch(intent)
-        }
         // 정보 저장 버튼
         binding.userSaveBtn.setOnClickListener {
-            db!!.userDao().insert(model.liveData.value!!)
-            // db에 저장된 모든 User 데이터들 중 phone만 출력
-            for(i in db.userDao().getAll()) {
-                println(i.phone)
-            }
+            val freshman = User(binding.userName.text.toString(), binding.userAge.text.toString(), 0, binding.userPhone.text.toString())
+            model.insert(freshman)
         }
 
 
     }
-
-//    현재 액티비티의 상태를 저장해두고 화면전환 등으로 액티비티가 다시 onCreate될 때 상태를 전달함
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//
-//    }
-
-
 
 }
