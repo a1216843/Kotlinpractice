@@ -10,12 +10,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.kotlinpractice.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     // TODO : Room 사용법 노션에 정리할 것, syncronized 키워드 알아보기
-    private lateinit var getResult : ActivityResultLauncher<Intent>
+    lateinit var getResult : ActivityResultLauncher<Intent>
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    lateinit var viewPager : ViewPager2
+
     // 액티비티와 생명주기를 달리하는 뷰모델에 라이브데이터를 두어 액티비티가 소멸되어도 데이터를 저장하도록 함
     lateinit var model : UserViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +61,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        viewPager = binding.pager
+        viewPager.adapter = ViewPagerAdapter(getList())
+    }
 
+    fun getList() : ArrayList<Int> {
+        return arrayListOf<Int>(R.drawable.test1, R.drawable.test2, R.drawable.test3)
     }
 
 //    현재 액티비티의 상태를 저장해두고 화면전환 등으로 액티비티가 다시 onCreate될 때 상태를 전달함
