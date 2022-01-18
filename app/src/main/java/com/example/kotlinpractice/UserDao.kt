@@ -1,5 +1,6 @@
 package com.example.kotlinpractice
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -9,7 +10,7 @@ interface UserDao {
     @Update
     fun update(user : User)
     @Delete
-    fun Delete(user : User)
+    fun delete(user : User)
     @Query("SELECT * FROM User")
-    fun getAll() : List<User>
+    fun getAll() : LiveData<List<User>>
 }
