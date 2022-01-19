@@ -8,8 +8,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/morta/Desktop/GitHub/Kotlinpractice/app/src/main/res/drawable/gray_ellipse.xml" value="0.1787037037037037" />
         <entry key="..\:/Users/morta/Desktop/GitHub/Kotlinpractice/app/src/main/res/layout/activity_edit_user.xml" value="0.17603850050658562" />
-        <entry key="..\:/Users/morta/Desktop/GitHub/Kotlinpractice/app/src/main/res/layout/activity_main.xml" value="0.2046875" />
+        <entry key="..\:/Users/morta/Desktop/GitHub/Kotlinpractice/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/morta/Desktop/GitHub/Kotlinpractice/app/src/main/res/layout/activity_second.xml" value="0.1" />
+        <entry key="..\:/Users/morta/Desktop/GitHub/Kotlinpractice/app/src/main/res/layout/fragment_1.xml" value="0.17553191489361702" />
+        <entry key="..\:/Users/morta/Desktop/GitHub/Kotlinpractice/app/src/main/res/layout/fragment_2.xml" value="0.17553191489361702" />
         <entry key="..\:/Users/morta/Desktop/GitHub/Kotlinpractice/app/src/main/res/layout/test_item_list.xml" value="0.25679347826086957" />
       </map>
     </option>

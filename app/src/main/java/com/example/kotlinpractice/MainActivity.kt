@@ -15,8 +15,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.kotlinpractice.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    // TODO : Room 사용법 노션에 정리할 것, syncronized 키워드 알아보기
-    lateinit var getResult : ActivityResultLauncher<Intent>
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     lateinit var viewPager : ViewPager2
 
@@ -25,14 +23,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        model = ViewModelProvider(this).get(UserViewModel::class.java)
 
+        // ViewModel
+        model = ViewModelProvider(this).get(UserViewModel::class.java)
         model.userProfileList.observe(this, Observer {
             var userList = "사용자 목록"
             for(user in it) {
                 userList += "\n" + "${user.id}" + ", ${user.name}" + ", ${user.age}" + ", ${user.phone}"
             }
-            binding.profileList.setText(userList)
+            binding.profileList.text = userList
         })
 
         // 정보 저장 버튼
@@ -40,9 +39,24 @@ class MainActivity : AppCompatActivity() {
             val freshman = User(binding.userName.text.toString(), binding.userAge.text.toString(), 0, binding.userPhone.text.toString())
             model.insert(freshman)
         }
+        // 액티비티 전환 버튼
+        binding.activityMove.setOnClickListener {
+            intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
+        }
 
+        val dotsIndicator = binding.dotsIndicator
         viewPager = binding.pager
         viewPager.adapter = ViewPagerAdapter(getList())
+        dotsIndicator.setViewPager2(viewPager)
+        viewPager.apply {
+            registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    binding.currentNum.text = "${position+1}"
+                }
+            })
+        }
     }
 
     fun getList() : ArrayList<Int> {

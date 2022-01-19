@@ -15,43 +15,102 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/name"
+        <EditText
+            android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="@{user.name}" />
-        <TextView
-            android:id="@+id/age"
+            android:textColor="@color/black" />
+        <EditText
+            android:id="@+id/user_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="@{user.age}" />
-        <TextView
-            android:id="@+id/gender"
+            android:textColor="@color/black" />
+        <EditText
+            android:id="@+id/user_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="@{(user.gender == 0) ? &quot;남성&quot; : &quot;여성&quot;}" />
-        <TextView
-            android:id="@+id/phone"
+            android:textColor="@color/black" />
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="@{user.phone}" />
-        <Button
-            android:id="@+id/user_config_btn"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/user_save_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="저장하기"/>
+            <Button
+                android:id="@+id/activity_move"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다음 액티비티로"/>
+            <ImageView
+                android:id="@+id/divide"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+        </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintRight_toRightOf="@id/pager"
+                app:layout_constraintBottom_toBottomOf="@+id/pager"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="16dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:background="@drawable/gray_ellipse">
+                <TextView
+                    android:id="@+id/current_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="10dp"
+                    android:textColor="#ffffff"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:text="/"
+                    android:textSize="10dp"
+                    android:textColor="#ffffff"/>
+                <TextView
+                    android:id="@+id/total_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textSize="10dp"
+                    android:textColor="#ffffff"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/dots_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="수정하기"/>
-        <Button
-            android:id="@+id/user_save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="저장하기"/>
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/pager"
+            app:dotsColor="#4B98DC"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="16dp"
+            app:dotsSpacing="4dp"
+            app:dotsWidthFactor="2.5"
+            app:selectedDotColor="#4B98DC"
+            app:progressMode="true" />
+        <TextView
+            android:id="@+id/profileList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </layout>
